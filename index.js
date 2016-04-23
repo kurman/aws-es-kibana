@@ -21,7 +21,6 @@ if (!m) {
 var REGION = m[1];
 var TARGET = 'https://' + process.argv[2];
 var PORT = 9200;
-var BIND_ADDRESS = '127.0.0.1';
 
 var creds;
 var chain = new AWS.CredentialProviderChain();
@@ -74,7 +73,7 @@ proxy.on('proxyReq', function (proxyReq, req, res, options) {
     if (request.headers['x-amz-security-token']) proxyReq.setHeader('x-amz-security-token', request.headers['x-amz-security-token']);
 });
 
-http.createServer(app).listen(PORT, BIND_ADDRESS);
+http.createServer(app).listen(PORT);
 
 console.log(figlet.textSync('AWS ES Proxy!', {
     font: 'Speed',
@@ -82,5 +81,5 @@ console.log(figlet.textSync('AWS ES Proxy!', {
     verticalLayout: 'default'
 }));
 
-console.log('AWS ES cluster available at http://' + BIND_ADDRESS + ':' + PORT);
-console.log('Kibana available at http://' + BIND_ADDRESS + ':' + PORT + '/_plugin/kibana/');
+console.log('AWS ES cluster available at http://localhost:' + PORT);
+console.log('Kibana available at http://localhost:' + PORT + '/_plugin/kibana/');
